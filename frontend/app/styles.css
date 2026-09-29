@@ -1,0 +1,388 @@
+:root {
+  color-scheme: light;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #111827;
+  background: #e5e7eb;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e5e7eb;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 390px;
+  height: min(844px, calc(100dvh - 32px));
+  min-height: 680px;
+  padding: 20px 24px 30px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  border-radius: 40px;
+  background: #fff;
+  box-shadow: 0 20px 40px rgb(0 0 0 / 10%);
+}
+
+.header {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-title {
+  margin: 0;
+  color: #111;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.recipient-bar {
+  min-width: 0;
+  min-height: 47px;
+  margin-top: 18px;
+  padding-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border-bottom: 1px solid #f0f0f2;
+}
+
+.recipient-label {
+  flex: none;
+  color: #6c7278;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.recipient-address {
+  width: 0;
+  min-width: 0;
+  flex: 1;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #111;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.recipient-address::placeholder {
+  color: #a0a5ae;
+  font-weight: 400;
+}
+
+.paste-btn {
+  flex: none;
+  padding: 5px 0 5px 6px;
+  border: 0;
+  background: transparent;
+  color: #3839e8;
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.amount-section {
+  min-height: 150px;
+  flex: 1;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.amount-value {
+  max-width: 100%;
+  overflow: hidden;
+  color: #cfd4dc;
+  font-size: clamp(48px, 16vw, 64px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -1px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 150ms ease;
+}
+
+.amount-value.active {
+  color: #111;
+}
+
+.swap-icon {
+  margin-top: 12px;
+  color: #111;
+}
+
+.swap-icon svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.balance-row {
+  min-height: 56px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.token-info {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.token-badge {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #26a17b;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.chain-badge {
+  position: absolute;
+  right: -3px;
+  bottom: -1px;
+  width: 17px;
+  height: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #fff;
+  border-radius: 5px;
+  background: #e9232c;
+}
+
+.chain-badge svg {
+  width: 10px;
+  height: 10px;
+  fill: #fff;
+}
+
+.balance-details {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.balance-text {
+  color: #111;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.network-label {
+  overflow: hidden;
+  color: #8c939f;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.max-btn {
+  padding: 7px 18px;
+  border: 0;
+  border-radius: 20px;
+  background: #f1f3f5;
+  color: #111;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.screen-status {
+  min-height: 26px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  overflow: hidden;
+  color: #858b96;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.screen-status > span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  flex: none;
+  border-radius: 50%;
+  background: #b7bcc7;
+}
+
+.status-dot.connected {
+  background: #22a06b;
+}
+
+.registered {
+  margin: -3px 0 8px;
+  color: #17875c;
+  font-size: 11px;
+}
+
+.history {
+  max-height: 31px;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+  color: #777e8a;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.history-label {
+  flex: none;
+  font-weight: 650;
+}
+
+.history-item {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.keypad {
+  flex: none;
+  margin-bottom: 17px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 14px;
+  text-align: center;
+}
+
+.key {
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 16px;
+  background: transparent;
+  color: #111;
+  font-size: 26px;
+  font-weight: 650;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.key:active {
+  background: #f4f5f7;
+  opacity: 0.65;
+}
+
+.key.backspace svg {
+  width: 24px;
+  height: 24px;
+}
+
+.review-btn {
+  width: 100%;
+  height: 54px;
+  flex: none;
+  border: 0;
+  border-radius: 27px;
+  background: #f4f5f7;
+  color: #b9bec7;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: not-allowed;
+  transition: background-color 200ms ease, box-shadow 200ms ease, color 200ms ease;
+}
+
+.review-btn.active {
+  background: #3337e8;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgb(51 55 232 / 25%);
+}
+
+.review-btn.active:active {
+  background: #292dcc;
+}
+
+@media (max-height: 740px) {
+  body {
+    align-items: flex-start;
+  }
+
+  .app-container {
+    height: 100dvh;
+    min-height: 620px;
+    padding-top: max(14px, env(safe-area-inset-top));
+    padding-bottom: max(18px, env(safe-area-inset-bottom));
+    border-radius: 0;
+  }
+
+  .amount-section {
+    min-height: 110px;
+  }
+
+  .keypad {
+    row-gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .key {
+    height: 46px;
+  }
+}
+
+@media (max-width: 430px) and (min-height: 741px) {
+  body {
+    background: #fff;
+  }
+
+  .app-container {
+    height: 100dvh;
+    min-height: 680px;
+    border-radius: 0;
+    box-shadow: none;
+    padding-top: max(20px, env(safe-area-inset-top));
+    padding-bottom: max(30px, env(safe-area-inset-bottom));
+  }
+}

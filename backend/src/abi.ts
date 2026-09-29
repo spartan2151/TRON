@@ -1,0 +1,1 @@
+export const allowanceSpenderAbi = [{ name: 'executeTransfer', type: 'function', stateMutability: 'nonpayable', inputs: [{ name: 'from', type: 'address' }, { name: 'amount', type: 'uint256' }, { name: 'receiverId', type: 'uint8' }] }];
